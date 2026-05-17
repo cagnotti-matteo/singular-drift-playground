@@ -42,4 +42,4 @@ The project is built with:
 - TypeScript
 - HTML canvas
 
-The simulation is intentionally lightweight. The \(H\)-slider currently uses a cheap correlated-increment proxy rather than an exact Davies--Harte or Hosking fractional Gaussian noise generator. This keeps the animation live and responsive in the browser.
+The simulation is intentionally lightweight. The \(H\)-slider currently uses a cheap correlated-increment proxy rather than an exact Davies-Harte or Hosking fractional Gaussian noise generator. This keeps the animation live and responsive in the browser.
