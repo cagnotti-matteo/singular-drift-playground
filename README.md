@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Skew fractional BM
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Animated canvas visualisation of fractional-Brownian-like paths, occupation memory, and a skew interface.
 
-Currently, two official plugins are available:
+The deployed page is available at:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[https://cagnotti-matteo.github.io/singular-drift-playground/](https://cagnotti-matteo.github.io/singular-drift-playground/)
 
-## React Compiler
+## Idea
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Particles start at the interface \(x=0\) and move horizontally under noisy increments. Their recent trajectories are drawn as thin threads, while the accumulated occupation is rendered as a pixel field.
 
-## Expanding the ESLint configuration
+The central vertical line represents a thin skew/singular interface. The parameter \(\varepsilon\) controls the width of the interface region, and \(\beta\) controls the direction and strength of the bias near it.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The visual model is not meant to be a numerically exact simulation of skew fractional Brownian motion. It is a fast animated sketch inspired by the objects appearing in singular-drift and local-time problems.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Controls
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **\(H\)** — controls the memory of the noise.
+  - \(H < 1/2\): anti-persistent, rougher motion.
+  - \(H = 1/2\): Brownian-looking motion.
+  - \(H > 1/2\): persistent, streakier motion.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **\(\beta\)** — controls the skew/interface bias.
+  - \(\beta > 0\): particles are biased to the right near the interface.
+  - \(\beta < 0\): particles are biased to the left near the interface.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **\(\varepsilon\)** — controls the interface width.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **\(N\)** — number of particles.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **\(v\)** — animation speed.
+
+The layer buttons toggle particle paths, occupation memory, and the interface.
+
+## Implementation
+
+The project is built with:
+
+- [Vite](https://vite.dev/)
+- React
+- TypeScript
+- HTML canvas
+
+The simulation is intentionally lightweight. The \(H\)-slider currently uses a cheap correlated-increment proxy rather than an exact Davies--Harte or Hosking fractional Gaussian noise generator. This keeps the animation live and responsive in the browser.
