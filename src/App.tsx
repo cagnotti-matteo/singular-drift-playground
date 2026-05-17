@@ -82,22 +82,24 @@ export default function App() {
   }, [params.particleCount]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+   const canvasElement = canvasRef.current;
+if (!canvasElement) return;
 
-    const context = canvas.getContext("2d");
-    if (!context) return;
+const canvasContext = canvasElement.getContext("2d");
+if (!canvasContext) return;
 
-    const dpr = window.devicePixelRatio || 1;
+const canvas = canvasElement;
+const context = canvasContext;
+const dpr = window.devicePixelRatio || 1;
 
-    function resize() {
-      const rect = canvas.getBoundingClientRect();
+function resize() {
+  const rect = canvas.getBoundingClientRect();
 
-      canvas.width = Math.floor(rect.width * dpr);
-      canvas.height = Math.floor(rect.height * dpr);
+  canvas.width = Math.floor(rect.width * dpr);
+  canvas.height = Math.floor(rect.height * dpr);
 
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
+  context.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
 
     resize();
     window.addEventListener("resize", resize);
