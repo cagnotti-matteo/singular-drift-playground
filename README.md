@@ -12,7 +12,7 @@ Particles start at the interface \(x=0\) and move horizontally under noisy incre
 
 The central vertical line represents a thin skew/singular interface. The parameter \(\varepsilon\) controls the width of the interface region, and \(\beta\) controls the direction and strength of the bias near it.
 
-The visual model is not meant to be a numerically exact simulation of skew fractional Brownian motion. It is a fast animated sketch inspired by the objects appearing in singular-drift and local-time problems.
+The visual model is not meant to be a numerically exact simulation of skew fractional Brownian motion. It is a fast animated sketch inspired by the objects appearing in the study of the convergence of numerical schemes to the skew fBm.
 
 ## Controls
 
